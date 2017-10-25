@@ -117,9 +117,8 @@
         var liTmpl = "";
         for (var i = 0, len = data.link.length; i < len; i++) {
 
-        	// https://github.com/dingyx/BlogResource/tree/master/source/assets/photos/
-          var minSrc = 'https://github.com/dingyx/BlogResource/blob/master/photo_resource/mini_photos/' + data.link[i];
-          var src = 'https://github.com/dingyx/BlogResource/blob/master/photo_resource/photos/' + data.link[i];
+          var minSrc = 'https://raw.githubusercontent.com/dingyx/BlogResource/master/photo_resource/mini_photos/' + data.link[i];
+          var src = 'https://raw.githubusercontent.com/dingyx/BlogResource/master/photo_resource/photos/' + data.link[i];
           var type = data.type[i];
           var target = src + (type === 'video' ? '.mp4' : '.jpg');
           src += '';
