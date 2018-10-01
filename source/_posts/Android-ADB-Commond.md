@@ -19,6 +19,9 @@ adb reboot
 ```markdown
 adb install <ApkFilePath>
 // eg. adb install F:\app\test.apk
+// 可选参数 -r 允许覆盖安装  eg. adb install -r F:\app\test.apk
+// -t 允许安装测试包        -s 安装到sd卡   
+// -d 允许安装低版本包装包  -g 授权所有运行时权限    
 ```
 
 * 卸载 apk
@@ -40,6 +43,28 @@ adb shell am start -n <packagename/.activityname>
 ```markdown
 adb shell am startservice -n <packagename/.servicename>
 // eg. adb shell am startservice -n com.edong.speaker/.service.SpeakerService
+```
+
+* 强制停止应用
+
+```markdown
+adb shell am force-stop <packagename>
+//eg. adb shell am force-stop com.edong.test
+```
+
+* 发送广播
+
+```markdown
+adb shell am broadcast [options] <INTENT>
+// 向所有组件发广播 adb shell am broadcast -a android.intent.action.BOOT_COMPLETED
+// 只向某个广播 BroadcastReceiver 发广播 adb shell am broadcast -a android.intent.action.BOOT_COMPLETED -n com.edong.test/.BootCompletedReceiver
+```
+
+* 模拟按键输入
+
+```markdown
+adb shell input keyevent <keycode> 
+// HOME键 eg. adb shell input keyevent 3
 ```
 
 * 从 Android 设备拉取文件到电脑
@@ -80,24 +105,31 @@ adb shell rm -rf <AndroidFilePath>
 
 ```markdown
 adb shell pm list packages
+// 列出系统应用 adb shell pm list packages -s
+// 列出第三方应用 adb shell pm list packages -3
+// 列出包名含有"test"的应用 adb shell pm list packages test
 ```
 
-* 根据包名查找已安装的 apk 路径
+* 查看前台 Activity
 
 ```markdown
-adb shell pm path <packagename>
+adb shell dumpsys activity activities | grep mFocusedActivity
 ```
 
-* adb 获取 root 权限 (机器须已 root )
+* 查看正在运行的 Services
 
 ```markdown
-adb root
+adb shell dumpsys activity services [<packagename>]
+// 指定 packagename 则列出对应包名的 Services
+// 不指定 则列出所有 Services
 ```
 
-* 重新挂载分区 (通常在执行 adb root 后，让原本不可读写文件变得可读写前执行此命令)
+* 查看 WIFI 密码 (需要root权限)
 
 ```markdown
-adb remount
+adb shell
+su
+cat /data/misc/wifi/*.conf
 ```
 
 * 查看正在运行的所有进程
@@ -118,3 +150,53 @@ adb shell pidof <ProcessName>
 adb shell killall <ProcessName>
 adb shell kill <ProcessPid>
 ```
+
+* 根据包名查找已安装的 apk 路径
+
+```markdown
+adb shell pm path <packagename>
+```
+
+* 查看 Mac 地址
+
+```
+adb shell cat /sys/class/net/wlan0/address
+```
+
+* 内存信息
+
+```markdown
+adb shell cat /proc/cpuinfo
+```
+
+* 查看资源占用情况
+
+```markdown
+adb shell top
+```
+
+* adb 获取 root 权限 (机器须已 root )
+
+```markdown
+adb root
+```
+
+* 重新挂载分区 (通常在执行 adb root 后，让原本不可读写文件变得可读写前执行此命令)
+
+```markdown
+adb remount
+```
+
+
+* 屏幕截图
+
+```markdown
+adb shell screencap -p /sdcard/screen.png
+```
+
+* 录制屏幕
+
+```markdown
+adb shell screenrecord /sdcard/filename.mp4
+```
+
