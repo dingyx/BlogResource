@@ -3,7 +3,9 @@ layout: post
 title: Android ADB 命令记录
 reward: false
 date: 2017-09-29 22:31:30
-tags: Android
+tags: 
+	- Android
+	- adb
 ---
 
 **记录平时用到的 adb 命令**

@@ -2,7 +2,8 @@
 layout: post
 title: Kotlin 语法 第一章
 date: 2018-10-16 20:20:15
-tags: Kotlin 语法 函数 变量 
+tags: 
+	- Kotlin
 reward: false
 ---
 
@@ -26,6 +27,8 @@ reward: false
   // 省略后如下
   fun sum(a: Int, b: Int) = a + b
   ```
+
+  <!-- more -->
 
   > 无返回值的函数 Unit返回类型可以省略
 
